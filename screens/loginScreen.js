@@ -21,6 +21,7 @@ export default function LoginScreen({ navigation }) {
              style={styles.input}
              autoCapitalize="none"
              autoCompleteType="email"
+             placeholder="Password" 
              autoCorrect={false}
              keyboardType="email-address"
              value={email}
@@ -33,6 +34,7 @@ export default function LoginScreen({ navigation }) {
              style={styles.input}
              autoCapitalize="none"
              autoCompleteType="password"
+             placeholder="Password" 
              autoCorrect={false}
              secureTextEntry={true}
              value={password}
