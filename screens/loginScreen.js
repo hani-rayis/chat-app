@@ -9,30 +9,34 @@ import {
 } from "react-native";
 
 export default function LoginScreen({ navigation }) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
         <Text style={styles.logo}>Chat App</Text>
         <View style={styles.inputView}>
           <TextInput
-            style={styles.inputText}
-            placeholder="Email..."
-            placeholderTextColor="white"
-            autoCapitalize="none"
-            autoCompleteType="none"
-            autoCorrect="none"
+             style={styles.input}
+             autoCapitalize="none"
+             autoCompleteType="email"
+             autoCorrect={false}
+             keyboardType="email-address"
+             value={email}
+             onChangeText={(input) => setEmail(input)}
           />
         </View>
 
         <View style={styles.inputView}>
           <TextInput
-            secureTextEntry
-            style={styles.inputText}
-            placeholder="Password..."
-            placeholderTextColor="white"
-            autoCapitalize="none"
-            autoCompleteType="none"
-            autoCorrect="none"
+             style={styles.input}
+             autoCapitalize="none"
+             autoCompleteType="password"
+             autoCorrect={false}
+             secureTextEntry={true}
+             value={password}
+             onChangeText={(input) => setPassword(input)}
           />
         </View>
         <TouchableOpacity>
