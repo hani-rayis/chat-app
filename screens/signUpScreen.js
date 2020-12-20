@@ -7,22 +7,27 @@ import {
   TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard,
+  LogBox
 } from "react-native";
 import firebase from "../database/firebaseDB";
 
+LogBox.ignoreLogs(['Setting a timer']);
+
+
 const auth = firebase.auth();
 
-export default function LoginScreen({ navigation }) {
+export default function SignUpScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorText, setErrorText] = useState("");
 
-  function login() {
+  function signup() {
     auth
-      .signInWithEmailAndPassword(email, password)
-      .then((userCredential) => {
-        console.log("Signed in!");
-        navigation.navigate("Chat");
+      .createUserWithEmailAndPassword(email, password)
+      .then(() => {
+        alert('created user successfully. please log in' 
+    );
+        navigation.navigate("Login");
       })
       .catch((error) => {
         console.log("Error!");
@@ -34,7 +39,7 @@ export default function LoginScreen({ navigation }) {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
-        <Text style={styles.logo}>Chat App</Text>
+        <Text style={styles.logo}>Register an account</Text>
         <View style={styles.inputView}>
           <TextInput
             style={styles.input}
@@ -63,12 +68,8 @@ export default function LoginScreen({ navigation }) {
           />
         </View>
 
-        <TouchableOpacity onPress={login} style={styles.loginBtn}>
-          <Text style={styles.loginText}>LOGIN</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
-          <Text style={styles.signUpText}>Signup</Text>
+        <TouchableOpacity onPress={signup} style={styles.signupBtn}>
+          <Text style={styles.signupText}>SIGN UP</Text>
         </TouchableOpacity>
 
         <Text style={styles.errorText}>{errorText}</Text>
@@ -80,14 +81,15 @@ export default function LoginScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "darkslateblue",
+    backgroundColor: "salmon",
     alignItems: "center",
     justifyContent: "center",
   },
   logo: {
     fontWeight: "bold",
-    fontSize: 45,
+    fontSize: 30,
     color: "beige",
+    textAlign: "center",
     marginBottom: 40,
   },
   inputView: {
@@ -95,29 +97,26 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 25,
     height: 60,
-    marginBottom: 20,
+    marginBottom: 15,
     justifyContent: "center",
     padding: 20,
   },
   inputText: {
     height: 50,
-    color: "white",
+    color: "black",
   },
-  forgot: {
-    color: "white",
-    fontSize: 11,
-  },
-  loginBtn: {
+
+  signupBtn: {
     width: "80%",
     backgroundColor: "lightblue",
     borderRadius: 20,
     height: 50,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 30,
+    marginTop: 10,
     marginBottom: 10,
   },
-  loginText: {
+  signupText: {
     color: "black",
   },
   signUpText: {

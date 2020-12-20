@@ -12,36 +12,27 @@ import firebase from "../database/firebaseDB";
 
 const auth = firebase.auth();
 
-export default function LoginScreen({ navigation }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [errorText, setErrorText] = useState("");
-
-  function login() {
-    auth
-      .signInWithEmailAndPassword(email, password)
-      .then((userCredential) => {
-        console.log("Signed in!");
-        navigation.navigate("Chat");
-      })
-      .catch((error) => {
-        console.log("Error!");
-        console.log(error.message);
-        setErrorText(error.message);
-      });
+export default function registerSuccess({ navigation }) {
+  
+  function signup() {
+    
+        navigation.navigate("Login");
+      }
+      
+      
   }
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <View style={styles.container}>
-        <Text style={styles.logo}>Chat App</Text>
+        <Text style={styles.logo}>Register an account</Text>
         <View style={styles.inputView}>
           <TextInput
             style={styles.input}
             autoCapitalize="none"
             autoCompleteType="email"
             placeholder="Email"
-            placeholderTextColor="black"
+            placeholderTextColor="white"
             autoCorrect={false}
             keyboardType="email-address"
             value={email}
@@ -55,7 +46,7 @@ export default function LoginScreen({ navigation }) {
             autoCapitalize="none"
             autoCompleteType="password"
             placeholder="Password"
-            placeholderTextColor="black"
+            placeholderTextColor="white"
             autoCorrect={false}
             secureTextEntry={true}
             value={password}
@@ -63,13 +54,10 @@ export default function LoginScreen({ navigation }) {
           />
         </View>
 
-        <TouchableOpacity onPress={login} style={styles.loginBtn}>
-          <Text style={styles.loginText}>LOGIN</Text>
+        <TouchableOpacity onPress={signup} style={styles.signupBtn}>
+          <Text style={styles.signupText}>SIGN UP</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => navigation.navigate("SignUp")}>
-          <Text style={styles.signUpText}>Signup</Text>
-        </TouchableOpacity>
 
         <Text style={styles.errorText}>{errorText}</Text>
       </View>
@@ -80,19 +68,20 @@ export default function LoginScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "darkslateblue",
+    backgroundColor: "salmon",
     alignItems: "center",
     justifyContent: "center",
   },
   logo: {
     fontWeight: "bold",
-    fontSize: 45,
+    fontSize: 50,
     color: "beige",
+    textAlign: "center",
     marginBottom: 40,
   },
   inputView: {
     width: "80%",
-    backgroundColor: "white",
+    backgroundColor: "black",
     borderRadius: 25,
     height: 60,
     marginBottom: 20,
@@ -107,17 +96,17 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 11,
   },
-  loginBtn: {
+  signupBtn: {
     width: "80%",
-    backgroundColor: "lightblue",
+    backgroundColor: "white",
     borderRadius: 20,
     height: 50,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 30,
+    marginTop: 40,
     marginBottom: 10,
   },
-  loginText: {
+  signupText: {
     color: "black",
   },
   signUpText: {
